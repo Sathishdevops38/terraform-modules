@@ -11,7 +11,7 @@ variable "instance_type" {
   }
 }
 
-variable "security_groups" {
+variable "sg_ids" {
   type = list
 }
 
