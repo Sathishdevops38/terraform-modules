@@ -74,7 +74,7 @@ variable "nat_gateway_tags" {
 
 variable "ami_id" {
   type = string
-  default = "ami-00fff6c7b7a58866c"
+  default = "ami-0042b697ec1f7e38a"
 }
 
 variable "instance_type" {
