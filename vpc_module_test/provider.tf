@@ -9,7 +9,7 @@ terraform {
     bucket = "terraform-backend-86s"
     key    = "remote-module.vpc"
     region = "us-west-2"
-    # use_lockfile = true
+    use_lockfile = true
   }
 }
 
