@@ -1,6 +1,10 @@
 resource "aws_instance" "this"{
-    ami = var.ami_id
+    count = length(var.num_instance)
+    ami = try(data.aws_ami.ami.id, var.ami_id)
     instance_type = var.instance_type
     vpc_security_group_ids = var.sg_ids
-    tags= var.tags
+    tags= merge(
+        local.common_name_suffix,
+        var.tags
+    )
 }

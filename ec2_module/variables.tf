@@ -1,3 +1,17 @@
+variable "num_instance" {
+  type = number
+  default = {}
+}
+
+variable "project_name" {
+  type = string
+  default = {}
+}
+
+variable "environment" {
+  type = string
+  default = {}
+}
 variable "ami_id" {
   type = string
   default = "ami-00fff6c7b7a58866c"
