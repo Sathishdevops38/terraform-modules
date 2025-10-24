@@ -1,16 +1,13 @@
 variable "num_instance" {
   type = number
-  default = {}
 }
 
 variable "project_name" {
   type = string
-  default = {}
 }
 
 variable "environment" {
   type = string
-  default = {}
 }
 variable "ami_id" {
   type = string
