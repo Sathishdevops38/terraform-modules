@@ -4,7 +4,9 @@ resource "aws_instance" "this"{
     instance_type = var.instance_type
     vpc_security_group_ids = var.sg_ids
     tags= merge(
-        local.common_name_suffix,
-        var.tags
+        local.base_tags,{
+            "Name" = "${local.common_name_suffix}-${each.key}"
+        }
+        
     )
 }

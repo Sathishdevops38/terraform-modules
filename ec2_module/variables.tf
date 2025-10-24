@@ -29,3 +29,7 @@ variable "sg_ids" {
 variable "tags" {
   type = map
 }
+
+variable "instance_name" {
+  type = list
+}
