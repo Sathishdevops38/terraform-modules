@@ -7,7 +7,7 @@ module "this" {
   private_subnet_cidrs = ["10.0.11.0/24","10.0.12.0/24"]
   database_subnet_cidrs = ["10.0.21.0/24","10.0.22.0/24"]
   instance_type = "t3.micro"
-  sg_ids =   ["sg-0600160900a41e0f2"]
+  sg_ids =   ["sg-0ec420ab4eee98afd"]
   tags = {
     Name = "catalogue"
     Terraform = true

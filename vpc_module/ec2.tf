@@ -11,16 +11,16 @@ resource "aws_instance" "this"{
 
     provisioner "remote-exec" {
       inline = [
-      "sudo dnf install -y nginx",
-      "sudo systemctl start nginx",
-      "sudo systemctl enable nginx"
+        "sudo dnf install -y nginx",
+        "sudo systemctl start nginx",
+        "sudo systemctl enable nginx"
     ]
     connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      password  =   "DevOps321" // Path to your SSH private key
-      host        = self.public_ip
-    }
+      type = "ssh"
+      user = "ec2-user"
+      password = "DevOps321"
+      host = self.public_ip
+  }
   }
 }
 
