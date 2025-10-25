@@ -1,6 +1,6 @@
 module "catalogue" {
   source = "../ec2_module"
-  num_instance = 3
+  # num_instance = 3
   project_name = "catalogue"
   environment = "dev"
   instance_type = "t3.micro"
