@@ -12,3 +12,13 @@ data "aws_ami" "ami_2023" {
     values = ["x86_64"] # Specify the desired architecture
   }
 }
+
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket         = "terraform-backend-86s"
+    key            = "roboshop-infra-vpc" # MUST match the VPC's key
+    region         = "us-west-2"
+  }
+}
+
