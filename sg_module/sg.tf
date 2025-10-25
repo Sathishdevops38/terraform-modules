@@ -12,7 +12,7 @@ resource "aws_security_group" "robo-sg"{
   tags = merge(
     var.sg_tags,
     local.common_tags,{
-        Name = "${local.common_suffix}"-"${var.sg_name}"
+        Name = "${local.common_suffix}-${var.sg_name}"
     }
   )
 }
