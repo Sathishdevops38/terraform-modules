@@ -28,5 +28,6 @@ variable "tags" {
 }
 
 variable "subnet_id" {
+  type = string
 }
 
