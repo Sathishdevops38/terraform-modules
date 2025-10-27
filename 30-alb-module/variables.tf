@@ -6,7 +6,7 @@ variable "environment" {
   type = string
 }
 
-variable "name" {
+variable "tg_name" {
   type = string
 }
 
