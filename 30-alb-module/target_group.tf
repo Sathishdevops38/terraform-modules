@@ -4,4 +4,11 @@ resource "aws_lb_target_group" "alb-tg" {
   port        = var.tg_port
   protocol    = var.tg_protocol
   vpc_id      = var.vpc_id
+   tags = merge(
+    var.alb_tg_tags,
+    local.common_tags,
+    {
+        Name = "${local.common_name_suffix}-frontend-lb-tg"
+    }
+  )
 }

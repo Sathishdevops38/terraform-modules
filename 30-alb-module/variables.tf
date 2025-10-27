@@ -48,3 +48,7 @@ variable "vpc_id" {
 variable "target_type" {
   
 }
+
+variable "alb_tg_tags" {
+  
+}
