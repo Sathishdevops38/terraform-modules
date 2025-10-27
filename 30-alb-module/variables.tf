@@ -6,7 +6,7 @@ variable "environment" {
   type = string
 }
 
-variable "aws_lb" {
+variable "name" {
   type = string
 }
 
