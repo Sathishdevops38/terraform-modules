@@ -11,11 +11,9 @@ variable "name" {
 }
 
 variable "security_groups" {
-  type = list
 }
 
 variable "subnets" {
-  type = list
 }
 
 variable "enable_deletion_protection" {
