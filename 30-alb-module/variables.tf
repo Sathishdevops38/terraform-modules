@@ -23,7 +23,7 @@ variable "enable_deletion_protection" {
 }
 
 variable "alb_tags" {
-  default = map
+  type = map
 }
 
 variable "load_balancer_type" {
