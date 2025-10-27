@@ -27,7 +27,24 @@ variable "alb_tags" {
 variable "load_balancer_type" {
   type = string
 }
-
 variable "internal" {
   default = false
+}
+
+variable "tg_name" {
+  
+}
+variable "tg_port" {
+  
+}
+
+variable "tg_protocol" {
+  
+}
+
+variable "vpc_id" {
+  
+}
+variable "target_type" {
+  
 }
