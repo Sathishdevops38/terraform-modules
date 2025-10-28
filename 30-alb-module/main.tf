@@ -32,7 +32,7 @@ resource "aws_lb_target_group" "alb-tg" {
 }
 
 resource "aws_lb_listener" "front_end" {
-  load_balancer_arn = aws_lb.front_end.arn
+  load_balancer_arn = aws_lb.frontend_lb.arn
   port              = "80"
   protocol          = "HTTP"
 
