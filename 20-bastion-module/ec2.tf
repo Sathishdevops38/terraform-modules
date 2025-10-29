@@ -3,6 +3,6 @@ resource "aws_instance" "this" {
     instance_type = var.instance_type
     vpc_security_group_ids = var.sg_ids
     subnet_id = var.subnet_id
-    user_data = var.user.data
+    # user_data = var.user.data
     tags = var.tags
 }
