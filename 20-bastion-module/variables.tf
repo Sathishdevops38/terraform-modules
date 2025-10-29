@@ -31,7 +31,6 @@ variable "subnet_id" {
   type = string
 }
 
-# variable "user_data" {
-  
-# }
-
+variable "user_data" {
+  type = string
+}
