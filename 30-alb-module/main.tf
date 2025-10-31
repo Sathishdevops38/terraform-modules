@@ -1,4 +1,4 @@
-resource "aws_lb" "frontend_lb" {
+resource "aws_lb" "this" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = var.load_balancer_type
@@ -11,12 +11,12 @@ resource "aws_lb" "frontend_lb" {
     var.alb_tags,
     local.common_tags,
     {
-        Name = "${local.common_name_suffix}-frontend-lb"
+        Name = "${local.common_name_suffix}"
     }
   )
 }
 
-resource "aws_lb_target_group" "alb-tg" {
+resource "aws_lb_target_group" "this-tg" {
   name        = var.tg_name
   target_type = var.target_type
   port        = var.tg_port
@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "alb-tg" {
     var.alb_tg_tags,
     local.common_tags,
     {
-        Name = "${local.common_name_suffix}-frontend-lb-tg"
+        Name = "${local.common_name_suffix}"
     }
   )
 }
