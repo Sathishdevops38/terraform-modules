@@ -34,3 +34,18 @@ variable "subnet_id" {
 variable "user_data" {
   type = string
 }
+
+# Inside the 20-bastion-module/variables.tf
+variable "iam_profile_name" {
+  description = "The name of the IAM instance profile to attach."
+  type        = string
+}
+
+variable "root_volume_size" {
+  type    = number
+  default = 8 # Default EC2 size
+}
+variable "root_volume_type" {
+  type    = string
+  default = "gp3" 
+}
