@@ -25,5 +25,5 @@ variable "domain_name"{
 }
 
 variable "alb_priority" {
-  
+  type = number 
 }
