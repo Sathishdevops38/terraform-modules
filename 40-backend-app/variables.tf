@@ -4,7 +4,6 @@ variable "environment" {
 }
 
 variable "component_name" {
-  type = list
 }
 variable "instance_type" {
 }
