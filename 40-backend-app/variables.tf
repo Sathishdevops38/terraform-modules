@@ -23,3 +23,7 @@ variable "health_check_path" {
 variable "domain_name"{
   
 }
+
+variable "alb_priority" {
+  
+}
