@@ -17,5 +17,5 @@ variable "rule_priority" {
 }
 
 variable "domain_name" {
-    default = "daws38sat.fun"
+  default = "daws38sat.fun"
 }
