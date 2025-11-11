@@ -1,7 +1,7 @@
 # Create EC2 instance
 resource "aws_instance" "main" {
     ami = local.ami_id
-    instance_type = "t3.micro"
+    instance_type = "t2.small"
     vpc_security_group_ids = [local.sg_id]
     subnet_id = local.private_subnet_id
     
@@ -81,7 +81,7 @@ resource "aws_launch_template" "main" {
   image_id = aws_ami_from_instance.main.id
 
   instance_initiated_shutdown_behavior = "terminate"
-  instance_type = "t3.micro"
+  instance_type = "t2.small"
 
   vpc_security_group_ids = [local.sg_id]
 
