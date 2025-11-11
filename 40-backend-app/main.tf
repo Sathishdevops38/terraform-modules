@@ -49,10 +49,10 @@ resource "aws_ami_from_instance" "component_ami" {
   source_instance_id = aws_instance.component.id
   depends_on         = [ aws_ec2_instance_state.component_stop ]
   
-  provisioner "local-exec" {
-    command = "aws ec2 terminate-instances --instance-ids ${self.source_instance_id} --region ${var.aws_region}"
-    when    = create
-  }
+  # provisioner "local-exec" {
+  #   command = "aws ec2 terminate-instances --instance-ids ${self.source_instance_id} --region ${var.aws_region}"
+  #   when    = create
+  # }
   
   tags = merge (
         local.common_tags,
@@ -154,5 +154,16 @@ resource "aws_lb_listener_rule" "component_rule" {
       # Dynamic component name in the host header rule
       values = ["${var.component_name}.backend-alb-${var.environment}.${var.domain_name}"]
     }
+  }
+}
+
+resource "terraform_data" "component_local" {
+  triggers_replace = [
+    aws_instance.main.id
+  ]
+  
+  depends_on = [aws_autoscaling_policy.scaling_policy]
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.component.id}"
   }
 }
