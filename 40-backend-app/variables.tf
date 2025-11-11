@@ -1,24 +1,21 @@
 variable "project_name" {
-}
-variable "environment" {  
-}
-
-variable "component_name" {
-}
-variable "instance_type" {
+  type        = string
+  default     = "roboshop"
 }
 
-variable "aws_region" {
-  
-}
-variable "health_check_path" {
-  
+variable "environment" {
+  type        = string
+  default     = "dev"
 }
 
-variable "domain_name"{
-  
+variable "component" {
+
 }
 
-variable "priority" {
-  type = number 
+variable "rule_priority" {
+
+}
+
+variable "domain_name" {
+    default = "daws86s.fun"
 }
