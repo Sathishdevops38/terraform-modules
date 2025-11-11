@@ -11,11 +11,6 @@ variable "instance_type" {
 variable "aws_region" {
   
 }
-
-variable "application_port" {
-  
-}
-
 variable "health_check_path" {
   
 }

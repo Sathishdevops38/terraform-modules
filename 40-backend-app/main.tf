@@ -68,7 +68,7 @@ resource "aws_ami_from_instance" "component_ami" {
 
 resource "aws_lb_target_group" "component" {
   name        = "${var.project_name}-${var.environment}-${var.component_name}-tg"
-  port        = var.application_port # Dynamic port
+  port        = local.tg_port # if frontend port is 80, otherwise port is 8080
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = local.vpc_id
@@ -78,7 +78,7 @@ resource "aws_lb_target_group" "component" {
     interval          = 10
     matcher           = "200-299"
     path              = var.health_check_path # Dynamic path
-    port              = var.application_port
+    port              = local.tg_port # if frontend port is 80, otherwise port is 8080
     protocol          = "HTTP"
     timeout           = 2
     unhealthy_threshold = 2
@@ -91,7 +91,8 @@ resource "aws_launch_template" "component" {
   instance_type = var.instance_type
 
   vpc_security_group_ids = [local.component_sg_id]
-
+  # when we run terraform apply again, a new version will be created with new AMI ID
+  update_default_version = true
   tag_specifications {
     resource_type = "instance"
     tags = merge(local.common_tags, { Name = "${var.project_name}-${var.environment}-${var.component_name}" })
@@ -108,13 +109,22 @@ resource "aws_autoscaling_group" "component" {
   max_size                  = 10
   min_size                  = 1
   desired_capacity          = 1
+  health_check_grace_period = 100
   health_check_type         = "ELB"
   vpc_zone_identifier       = local.private_subnet_ids
   target_group_arns         = [aws_lb_target_group.component.arn]
-  
+  force_delete              = false  
   launch_template {
     id      = aws_launch_template.component.id
     version = aws_launch_template.component.latest_version
+  }
+  
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50 # atleast 50% of the instances should be up and running
+    }
+    triggers = ["launch_template"]
   }
   
   dynamic "tag" {
@@ -124,6 +134,9 @@ resource "aws_autoscaling_group" "component" {
       value             = tag.value
       propagate_at_launch = true
     }
+  }
+  timeouts {
+    delete = "15m"
   }
 }
 
@@ -141,7 +154,7 @@ resource "aws_autoscaling_policy" "scaling_policy" {
 }
 
 resource "aws_lb_listener_rule" "component_rule" {
-  listener_arn = local.backend_alb_listener_arn
+  listener_arn = local.listener_arn
   priority     = var.priority
 
   action {
@@ -152,7 +165,7 @@ resource "aws_lb_listener_rule" "component_rule" {
   condition {
     host_header {
       # Dynamic component name in the host header rule
-      values = ["${var.component_name}.backend-alb-${var.environment}.${var.domain_name}"]
+      values = [local.host_context]
     }
   }
 }
