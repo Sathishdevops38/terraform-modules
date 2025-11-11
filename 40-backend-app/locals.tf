@@ -6,7 +6,7 @@ locals {
   sg_id = data.aws_ssm_parameter.sg_id.value
   tg_port = "${var.component}" == "frontend" ? 80 : 8080
   health_check_path = "${var.component}" == "frontend" ? "/" : "/health"
-  ami_id = data.aws_ami.ami_2023
+  ami_id = data.aws_ami.ami_2023.id
   backend_alb_listener_arn = data.aws_ssm_parameter.backend_alb_listener_arn.value
   frontend_alb_listener_arn = data.aws_ssm_parameter.frontend_alb_listener_arn.value
   listener_arn = "${var.component}" == "frontend" ? local.frontend_alb_listener_arn : local.backend_alb_listener_arn
