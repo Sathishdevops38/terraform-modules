@@ -22,6 +22,17 @@ resource "aws_lb_target_group" "this-tg" {
   port        = var.tg_port
   protocol    = var.tg_protocol
   vpc_id      = var.vpc_id
+  deregistration_delay = 60 # waiting period before deleting the instance
+  health_check {
+    healthy_threshold = 2
+    interval = 10
+    matcher = "200-299"
+    path = "/"
+    port = 8080
+    protocol = "HTTP"
+    timeout = 2
+    unhealthy_threshold = 2
+  }
    tags = merge(
     var.alb_tg_tags,
     local.common_tags,
